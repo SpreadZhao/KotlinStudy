@@ -1,6 +1,8 @@
+import concurrency.ConcurrencyVSSerial
+import concurrency.Deadlock
+
 fun main(args: Array<String>) {
-//    TimeCost.countTime {
-//        MyHashMap.test()
-//    }
-    ConstructorTest.test()
+//    ConcurrencyVSSerial.startVS()
+    Deadlock().deadlock()
+//    Deadlock().dummyDeadlock()
 }

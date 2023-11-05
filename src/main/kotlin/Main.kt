@@ -1,10 +1,9 @@
-import concurrency.ConcurrencyVSSerial
-import concurrency.Deadlock
-import jni.HelloJNI
+import generic.GenericTest
 
 fun main(args: Array<String>) {
 //    ConcurrencyVSSerial.startVS()
 //    Deadlock().deadlock()
 //    Deadlock().dummyDeadlock()
-    HelloJNI.test()
+//    HelloJNI.test()
+  GenericTest.testAdder()
 }

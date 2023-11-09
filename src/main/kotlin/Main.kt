@@ -1,3 +1,4 @@
+import concurrency.ReorderExample
 import generic.GenericTest
 
 fun main(args: Array<String>) {
@@ -5,5 +6,6 @@ fun main(args: Array<String>) {
 //    Deadlock().deadlock()
 //    Deadlock().dummyDeadlock()
 //    HelloJNI.test()
-  GenericTest.testAdder()
+//  GenericTest.testAdder()
+  ReorderExample.test()
 }

@@ -1,3 +1,5 @@
+import concurrency.VolatileExample
+import concurrency.VolatileExample2
 import delegation.intro.DelegationTest
 import delegation.mylazy.MyLazyTest
 import security.AESTest
@@ -11,5 +13,7 @@ fun main(args: Array<String>) {
 //  ReorderExample.test()
 //  DelegationTest.testJava()
 //  MyLazyTest.test()
-  AESTest.test()
+//  AESTest.test()
+//  VolatileExample.test()
+  VolatileExample2.test()
 }

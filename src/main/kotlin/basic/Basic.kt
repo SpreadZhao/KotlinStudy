@@ -1,3 +1,5 @@
+package basic
+
 class Basic {
   companion object {
     @JvmStatic

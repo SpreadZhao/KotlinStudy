@@ -6,6 +6,10 @@ public class Child extends Parent {
     super.print();
   }
 
+  public void anotherPrint() {
+    super.print();
+  }
+
   @Override
   public void realPrint() {
     System.out.println("child");

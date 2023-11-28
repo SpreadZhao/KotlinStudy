@@ -2,7 +2,7 @@ package basic.testsupercall;
 
 public class Parent {
   public void print() {
-    realPrint();
+    System.out.println("parent print");
   }
 
   public void realPrint() {

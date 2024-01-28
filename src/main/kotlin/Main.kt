@@ -1,3 +1,4 @@
+import basic.BackingField
 import concurrency.VolatileExample
 import concurrency.VolatileExample2
 import concurrency.VolatileExample3
@@ -17,5 +18,7 @@ fun main(args: Array<String>) {
 //  AESTest.test()
 //  VolatileExample.test()
 //  VolatileExample2.test()
-  VolatileExample3.test()
+//  VolatileExample3.test()
+  val bf = BackingField()
+  bf.age = 1
 }

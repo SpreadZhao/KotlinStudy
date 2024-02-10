@@ -5,6 +5,7 @@ import concurrency.VolatileExample3
 import delegation.intro.DelegationTest
 import delegation.mylazy.MyLazyTest
 import security.AESTest
+import kotlin.concurrent.thread
 
 fun main(args: Array<String>) {
 //    ConcurrencyVSSerial.startVS()
@@ -19,6 +20,7 @@ fun main(args: Array<String>) {
 //  VolatileExample.test()
 //  VolatileExample2.test()
 //  VolatileExample3.test()
-  val bf = BackingField()
-  bf.age = 1
+//  val bf = BackingField()
+//  bf.age = 1
+  thread { while (true) {} }
 }

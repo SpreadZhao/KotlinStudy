@@ -21,15 +21,15 @@ class DefaultThreadPool<JOB : Runnable> : ThreadPool<JOB> {
     private val threadNum = AtomicLong()
 
     constructor() {
-        initializeWorkers(DEFAULT_WORKER_NUMBERS)
+        addWorkersInternal(DEFAULT_WORKER_NUMBERS)
     }
 
     constructor(num: Int) {
         workerNum = if (num > MAX_WORKER_NUMBERS) MAX_WORKER_NUMBERS else max(MIN_WORKER_NUMBERS, num)
-        initializeWorkers(workerNum)
+        addWorkersInternal(workerNum)
     }
 
-    inner class Worker(var thread: Thread? = null) : Runnable {
+    private inner class Worker(var thread: Thread? = null) : Runnable {
 
         @Volatile
         private var isRunning = true
@@ -60,7 +60,7 @@ class DefaultThreadPool<JOB : Runnable> : ThreadPool<JOB> {
         }
     }
 
-    private fun initializeWorkers(num: Int) {
+    private fun addWorkersInternal(num: Int) {
         repeat(num) {
             val worker = Worker()
             workers.add(worker)
@@ -87,7 +87,7 @@ class DefaultThreadPool<JOB : Runnable> : ThreadPool<JOB> {
             if (n + this.workerNum > MAX_WORKER_NUMBERS) {
                 n = MAX_WORKER_NUMBERS - this.workerNum
             }
-            initializeWorkers(n)
+            addWorkersInternal(n)
             this.workerNum += n
         }
     }

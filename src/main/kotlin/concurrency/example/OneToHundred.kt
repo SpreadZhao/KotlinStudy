@@ -1,4 +1,4 @@
-package concurrency
+package concurrency.example
 
 /**
  * 三个线程交替打印1-100

@@ -17,6 +17,8 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
   implementation("org.jsoup:jsoup:1.17.2")
+  implementation("net.coobird:thumbnailator:0.4.20")
+
 }
 
 tasks.test {

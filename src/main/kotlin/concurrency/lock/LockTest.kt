@@ -11,9 +11,9 @@ class LockTest {
     class MutexPrintThread(private val thNum: Int, private val otherNum: Int) : Thread("mutex-thread-$thNum") {
         override fun run() {
             while (i < 100) {
-                mutex.lock()
+                val got = mutex.tryLock()
                 if (currThNum != thNum) {
-                    mutex.unlock()
+                    if (got) mutex.unlock()
                     continue
                 }
                 println("thread $thNum print $i")

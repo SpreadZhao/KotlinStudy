@@ -8,9 +8,6 @@ public class ConstructorTest {
     int age;
     String name;
 
-    static {
-      System.out.println("Static block of People");
-    }
 
     {
       System.out.println("Non-static block of People");
@@ -35,9 +32,6 @@ public class ConstructorTest {
 
     int stuId;
 
-    static {
-      System.out.println("Static block of Student");
-    }
 
     {
       System.out.println("Non-static block of Student");

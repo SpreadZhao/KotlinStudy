@@ -13,7 +13,6 @@ class TwinsLock : Lock {
             while (true) {
                 lock.lock()
                 try {
-                    SleepUtils.second(1)
                     println(currentThread().name)
                     SleepUtils.second(1)
                 } finally {
@@ -59,11 +58,11 @@ class TwinsLock : Lock {
             }
         }
 
-        override fun tryReleaseShared(returnCount: Int): Boolean {
+        override fun tryReleaseShared(released: Int): Boolean {
             while (true) {
-                val current = state
-                val newCount = current + returnCount
-                if (compareAndSetState(current, newCount)) {
+                val curr = state
+                val after = curr + released
+                if (compareAndSetState(curr, after)) {
                     return true
                 }
             }
@@ -91,7 +90,6 @@ class TwinsLock : Lock {
     override fun tryLock(time: Long, unit: TimeUnit): Boolean {
         return sync.tryAcquireNanos(1, time)
     }
-
 
 
     override fun newCondition(): Condition {

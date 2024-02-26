@@ -106,7 +106,14 @@ private fun next(i: Int, n: Int): Int {
     else i + 1
 }
 
+fun testReenter() {
+    val mutex = Mutex()
+    mutex.lock()
+    mutex.lock()
+}
+
 
 fun main() {
-    startNThread(3)
+//    startNThread(3)
+    testReenter()
 }

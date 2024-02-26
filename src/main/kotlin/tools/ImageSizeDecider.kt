@@ -47,14 +47,14 @@ fun testCopy() {
 }
 
 fun blockImgs() {
-    val folderUrl = "D:\\temp\\futa"
+    val folderUrl = "D:\\temp\\pic"
     val folder = File(folderUrl)
     if (folder.isDirectory) {
         val files = folder.listFiles() ?: return
         val size = files.size
         val step = 200
         var start = 0
-        var count = 91
+        var count = 228
         while (start < size) {
             for (i in start until start + step) {
                 if (i >= size) {
@@ -80,7 +80,7 @@ fun blockImgs() {
 
 
 
-const val DEST_URL = "D:\\temp\\futa"
+const val DEST_URL = "D:\\temp\\pic"
 
 fun rotateImage(srcFile: File) {
     val destFileUrl = "${DEST_URL}\\${srcFile.name}"
@@ -133,7 +133,7 @@ fun copyFile(srcFile: File, destUrl: String) {
 }
 
 fun main() {
-//    deleteRedundant("D:\\downloads\\telegram\\ChatExport_2024-02-24\\photos")
+//    deleteRedundant("D:\\downloads\\telegram\\ChatExport_2024-02-25\\photos")
 //    choose()
 //    testRotate()
 //    testCopy()

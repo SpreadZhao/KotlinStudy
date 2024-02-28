@@ -45,5 +45,5 @@ class FairAndUnfairTest {
 }
 
 fun main() {
-    FairAndUnfairTest.testFair()
+    FairAndUnfairTest.testUnfair()
 }

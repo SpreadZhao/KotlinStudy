@@ -7,6 +7,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import javax.imageio.ImageIO
 
@@ -16,8 +17,10 @@ object ImageSizeDecider {
 
     val count = AtomicInteger(0)
 
+    val exceptionCount = AtomicInteger(0)
+
     fun isLandscapeImage(width: Int, height: Int): Boolean {
-        return width > height * 1.5
+        return width > height
     }
 
     fun isPortraitImage(width: Int, height: Int): Boolean {
@@ -46,22 +49,21 @@ fun testCopy() {
     }
 }
 
-fun blockImgs() {
-    val folderUrl = "D:\\temp\\pic"
+fun blockImgs(folderUrl: String) {
     val folder = File(folderUrl)
     if (folder.isDirectory) {
         val files = folder.listFiles() ?: return
         val size = files.size
         val step = 200
         var start = 0
-        var count = 228
+        var count = 17
         while (start < size) {
             for (i in start until start + step) {
                 if (i >= size) {
                     break
                 }
                 val file = files[i]
-                val destFolderUrl = "D:\\temp\\wallpaper${count}"
+                val destFolderUrl = "D:\\temp\\landscape\\out\\wallpaper${count}"
                 val destFolder = File(destFolderUrl)
                 if (!destFolder.exists()) {
                     destFolder.mkdir()
@@ -80,10 +82,13 @@ fun blockImgs() {
 
 
 
-const val DEST_URL = "D:\\temp\\pic"
+const val CHOOSE_DEST_URL = "D:\\temp\\landscape\\2"
+const val CHOOSE_SRC_URL = "D:\\files\\chatfiles\\telegram\\ChatExport_2024-02-25\\photos"
+const val CHOOSE_DEST_URL_2 = "D:\\temp\\landscape\\3"
+const val CHOOSE_SRC_URL_2 = "D:\\downloads\\telegram\\ChatExport_2024-02-25\\photos"
 
 fun rotateImage(srcFile: File) {
-    val destFileUrl = "${DEST_URL}\\${srcFile.name}"
+    val destFileUrl = "${CHOOSE_DEST_URL}\\${srcFile.name}"
     val destFile = File(destFileUrl)
     if (!destFile.exists()) {
         destFile.createNewFile()
@@ -99,13 +104,13 @@ fun rotateImage(srcFile: File) {
 }
 
 fun copyFile(srcFile: File) {
-    val destFileUrl = "${DEST_URL}\\${srcFile.name}"
+    val destFileUrl = "${CHOOSE_DEST_URL}\\${srcFile.name}"
 //    println("dest url: $destFileUrl")
     val destFile = File(destFileUrl)
     if (!destFile.exists()) {
         destFile.createNewFile()
-    } else {
         ImageSizeDecider.count.getAndIncrement()
+    } else {
         return
     }
     val sourceChannel = FileInputStream(srcFile).channel
@@ -114,13 +119,14 @@ fun copyFile(srcFile: File) {
 //    println("transfer finished")
     sourceChannel.close()
     destChannel.close()
-    println("count: ${ImageSizeDecider.count.get()}")
+    println("count: ${ImageSizeDecider.count.get()}, file: ${destFile.name}")
 }
 
 fun copyFile(srcFile: File, destUrl: String) {
     val destFile = File(destUrl)
     if (!destFile.exists()) {
         destFile.createNewFile()
+        ImageSizeDecider.count.getAndIncrement()
     } else {
         println("file existed: $destUrl, return")
         return
@@ -130,20 +136,34 @@ fun copyFile(srcFile: File, destUrl: String) {
     destChannel.transferFrom(sourceChannel, 0, sourceChannel.size())
     sourceChannel.close()
     destChannel.close()
+    println("count: ${ImageSizeDecider.count.get()}, file: ${destFile.name}")
 }
 
 fun main() {
-//    deleteRedundant("D:\\downloads\\telegram\\ChatExport_2024-02-25\\photos")
-//    choose()
+//    deleteRedundant(CHOOSE_SRC_URL)
+//    deleteRedundant(CHOOSE_SRC_URL_2)
+//    try {
+//        choose(CHOOSE_SRC_URL, CHOOSE_DEST_URL)
+//        choose(CHOOSE_SRC_URL_2, CHOOSE_DEST_URL_2)
+//    } catch (e: Exception) {
+//        ImageSizeDecider.exceptionCount.getAndIncrement()
+//    }
+
+//    while (true) {
+//        println("exception count: ${ImageSizeDecider.exceptionCount.get()}")
+//        TimeUnit.SECONDS.sleep(10)
+//    }
+
+//
 //    testRotate()
 //    testCopy()
-    blockImgs()
+    blockImgs(CHOOSE_DEST_URL_2)
 }
 
-fun choose() {
-    val folderUrl = "D:\\downloads\\telegram\\ChatExport_2024-02-25\\photos"
+fun choose(srcFolder: String, destFolder: String) {
+//    val folderUrl = "D:\\downloads\\telegram\\ChatExport_2024-02-25\\photos"
 
-    val imageFolder = File(folderUrl)
+    val imageFolder = File(srcFolder)
     if (imageFolder.isDirectory) {
         val allFiles = imageFolder.listFiles() ?: return
         for (file in allFiles) {
@@ -151,10 +171,9 @@ fun choose() {
                 val img = ImageIO.read(file)
                 val width = img.width
                 val height = img.height
-                if (ImageSizeDecider.isPortraitImage(width, height)) {
-                    rotateImage(file)
-                } else {
-                    copyFile(file)
+                if (ImageSizeDecider.isLandscapeImage(width, height)) {
+                    val destUrl = "${destFolder}\\${file.name}"
+                    copyFile(file, destUrl)
                 }
             }
         }

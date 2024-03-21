@@ -37,7 +37,8 @@ class OneToHundred {
                     while (currThread != thNum && isRunning) {
                         try {
                             lock.wait()
-                        } catch (_: InterruptedException) {}
+                        } catch (_: InterruptedException) {
+                        }
                     }
                     if (currNum == 100) {
                         /*

@@ -1,8 +1,6 @@
 package concurrency.pool
 
-import java.util.ArrayList
-import java.util.Collections
-import java.util.LinkedList
+import java.util.*
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.math.max
 
@@ -50,7 +48,8 @@ class DefaultThreadPool<JOB : Runnable> : ThreadPool<JOB> {
                 }
                 try {
                     job.run()
-                } catch (_: Exception) {}
+                } catch (_: Exception) {
+                }
             }
         }
 

@@ -14,7 +14,8 @@ class Piped {
                     print(receive.toChar())
                     receive = reader.read()
                 }
-            } catch (_: IOException) {}
+            } catch (_: IOException) {
+            }
         }
     }
 }

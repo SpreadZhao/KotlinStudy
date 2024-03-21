@@ -24,7 +24,6 @@ class Local {
     }
 
 
-
     class LocalThread : Thread() {
         var value = 0
         override fun run() {
@@ -41,7 +40,7 @@ fun main() {
 
 fun format() {
     val example = Local()
-    for (i in 0 until  10) {
+    for (i in 0 until 10) {
         val t = Thread(Local.Formatter(), "$i")
         Thread.sleep(Random.nextLong(1000))
         t.start()

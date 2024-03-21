@@ -1,10 +1,3 @@
-import basic.BackingField
-import concurrency.VolatileExample
-import concurrency.VolatileExample2
-import concurrency.VolatileExample3
-import delegation.intro.DelegationTest
-import delegation.mylazy.MyLazyTest
-import security.AESTest
 import kotlin.concurrent.thread
 
 fun main(args: Array<String>) {
@@ -22,5 +15,8 @@ fun main(args: Array<String>) {
 //  VolatileExample3.test()
 //  val bf = BackingField()
 //  bf.age = 1
-  thread { while (true) {} }
+    thread {
+        while (true) {
+        }
+    }
 }

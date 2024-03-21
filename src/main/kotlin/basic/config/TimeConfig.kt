@@ -1,7 +1,7 @@
 package basic.config
 
 class TimeConfig : Config() {
-  override fun getConfig(): Int {
-    return 1
-  }
+    override fun getConfig(): Int {
+        return 1
+    }
 }

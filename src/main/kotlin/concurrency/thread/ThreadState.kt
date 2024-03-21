@@ -1,8 +1,5 @@
 package concurrency.thread
 
-import java.util.concurrent.TimeUnit
-import kotlin.concurrent.thread
-
 class ThreadState {
     class TimeWaiting : Runnable {
         override fun run() {

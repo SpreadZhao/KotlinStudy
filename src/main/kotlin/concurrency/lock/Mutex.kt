@@ -16,6 +16,10 @@ class Mutex : Lock {
         val heldExclusively: Boolean
             get() = state == 1
 
+        override fun isHeldExclusively(): Boolean {
+            return heldExclusively
+        }
+
         fun tryLock(): Boolean {
             return tryAcquire(1)
         }
@@ -85,18 +89,26 @@ fun test() {
 }
 
 fun testPrint() {
-    val pt1 = LockTest.MutexPrintThread(1, 2)
-    val pt2 = LockTest.MutexPrintThread(2, 3)
-    val pt3 = LockTest.MutexPrintThread(3, 1)
+    val pt1 = MutexTest.MutexPrintThread(1, 2)
+    val pt2 = MutexTest.MutexPrintThread(2, 3)
+    val pt3 = MutexTest.MutexPrintThread(3, 1)
     pt1.start()
     pt2.start()
     pt3.start()
 }
 
 fun startNThread(n: Int) {
-    val threads = ArrayList<LockTest.MutexPrintThread>(n)
+    val threads = ArrayList<MutexTest.MutexPrintThread>(n)
     repeat(n) {
-        threads.add(LockTest.MutexPrintThread(it + 1, next(it + 1, n)))
+        threads.add(MutexTest.MutexPrintThread(it + 1, next(it + 1, n)))
+    }
+    threads.forEach { it.start() }
+}
+
+fun startNThread2(n: Int) {
+    val threads = ArrayList<MutexTest.MutexPrintThread2>(n)
+    repeat(n) {
+        threads.add(MutexTest.MutexPrintThread2(it + 1, next(it + 1, n)))
     }
     threads.forEach { it.start() }
 }
@@ -114,6 +126,7 @@ fun testReenter() {
 
 
 fun main() {
-//    startNThread(3)
-    testReenter()
+//    startNThread(99)
+    startNThread2(99)
+//    testReenter()
 }

@@ -7,7 +7,6 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import javax.imageio.ImageIO
 
@@ -26,8 +25,6 @@ object ImageSizeDecider {
     fun isPortraitImage(width: Int, height: Int): Boolean {
         return height > width
     }
-
-
 
 
 }
@@ -78,8 +75,6 @@ fun blockImgs(folderUrl: String) {
         }
     }
 }
-
-
 
 
 const val CHOOSE_DEST_URL = "D:\\temp\\landscape\\2"

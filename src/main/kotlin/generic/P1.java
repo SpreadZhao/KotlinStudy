@@ -21,6 +21,7 @@ class P5 extends P4 {
 
 class P<T extends P3> {
     int i;
+
     public static void main(String[] args) {
         P<P3> a = new P<>();
         P<P4> b = new P<>();

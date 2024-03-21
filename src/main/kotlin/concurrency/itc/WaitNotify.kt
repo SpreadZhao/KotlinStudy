@@ -2,7 +2,7 @@ package concurrency.itc
 
 import concurrency.thread.SleepUtils
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class WaitNotify {

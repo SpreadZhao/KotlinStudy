@@ -7,7 +7,8 @@ class Join {
         override fun run() {
             try {
                 previous.join()
-            } catch (_: InterruptedException) {}
+            } catch (_: InterruptedException) {
+            }
             println("${Thread.currentThread().name} terminate.")
         }
     }

@@ -18,7 +18,8 @@ class ThreadInterrupt {
 
     class BusyRunner : Runnable {
         override fun run() {
-            while (true) {}
+            while (true) {
+            }
         }
     }
 }
@@ -46,7 +47,10 @@ fun first() {
 }
 
 fun other() {
-    val th = thread { while (true) {} }
+    val th = thread {
+        while (true) {
+        }
+    }
     println("before: ${th.isInterrupted}")
     th.interrupt()
     println("after: ${th.isInterrupted}")

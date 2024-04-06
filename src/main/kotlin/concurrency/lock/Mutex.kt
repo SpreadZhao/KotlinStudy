@@ -113,6 +113,15 @@ fun startNThread2(n: Int) {
     threads.forEach { it.start() }
 }
 
+fun startNThread3(n: Int) {
+    val test = MutexTestN(n)
+    val threads = ArrayList<MutexTestN.MutexPrintThread>(n)
+    repeat(n) {
+        threads.add(MutexTestN.MutexPrintThread(it + 1, next(it + 1, n), test.conditions))
+    }
+    threads.forEach { it.start() }
+}
+
 private fun next(i: Int, n: Int): Int {
     return if (i == n) 1
     else i + 1
@@ -126,7 +135,10 @@ fun testReenter() {
 
 
 fun main() {
+//    val start = System.currentTimeMillis()
 //    startNThread(99)
-    startNThread2(99)
+//    startNThread2(99)
+    startNThread3(3)
 //    testReenter()
+
 }

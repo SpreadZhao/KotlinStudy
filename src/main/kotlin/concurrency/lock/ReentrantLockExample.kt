@@ -24,3 +24,7 @@ class ReentrantLockExample {
         }
     }
 }
+
+fun main() {
+    ReentrantLockExample().lock.unlock()
+}
